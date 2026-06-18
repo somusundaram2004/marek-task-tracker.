@@ -1,0 +1,37 @@
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.task-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.task-card h3 {
+  margin: 0 0 8px;
+}
+
+.task-card p {
+  margin: 0 0 12px;
+  color: #444;
+}
+
+.task-info {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+}
