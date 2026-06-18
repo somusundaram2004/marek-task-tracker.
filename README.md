@@ -149,15 +149,15 @@ Run the schema file provided in the project.
 
 ### Home Page
 
-![Home Page](screenshots/home-page.png)
+<img src="screenshots/home-page.png" alt="Marek Task Tracker home page" width="900">
 
 ### Add Task
 
-![Add Task](screenshots/add-task.png)
+<img src="screenshots/add-task.png" alt="Add task form" width="900">
 
 ### Task Filters
 
-![Task Filters](screenshots/task-filters.png)
+<img src="screenshots/task-filters.png" alt="Task status and priority filters" width="900">
 
 ### Database Table
 
