@@ -23,14 +23,24 @@
 <hr>
 
 <p>Total Tasks: {{ totalTasks }}</p>
-<p>Pending Tasks: {{ pendingTasks }}</p>
-<p>Done Tasks: {{ doneTasks }}</p>
+<p>Pending Tasks: {{ pendingCount }}</p>
+<p>Completed Tasks: {{ completedCount }}</p>
 
 <label for="statusFilter">Status Filter:</label>
 <select id="statusFilter" [(ngModel)]="statusFilter" (change)="applyFilters()">
   <option value="All">All</option>
   <option value="Pending">Pending</option>
   <option value="Done">Done</option>
+</select>
+
+<br><br>
+
+<label for="priorityFilter">Priority Filter:</label>
+<select id="priorityFilter" [(ngModel)]="priorityFilter" (change)="applyFilters()">
+  <option value="All">All</option>
+  <option value="Low">Low</option>
+  <option value="Medium">Medium</option>
+  <option value="High">High</option>
 </select>
 
 <hr>

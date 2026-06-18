@@ -20,11 +20,11 @@ export class App implements OnInit {
     return this.tasks.length;
   }
 
-  get pendingTasks(): number {
+  get pendingCount(): number {
     return this.tasks.filter((task) => !task.is_done).length;
   }
 
-  get doneTasks(): number {
+  get completedCount(): number {
     return this.tasks.filter((task) => task.is_done).length;
   }
 
