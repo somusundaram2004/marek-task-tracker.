@@ -1,64 +1,83 @@
-<h1>Task Tracker</h1>
+<main class="container">
+  <h1>Task Tracker</h1>
 
-<h3>Add New Task</h3>
+  <section class="panel">
+    <h3>Add New Task</h3>
 
-<input type="text" placeholder="Title" [(ngModel)]="newTask.title">
-<br><br>
+    <div class="form-grid">
+      <input type="text" placeholder="Title" [(ngModel)]="newTask.title">
 
-<textarea placeholder="Description" [(ngModel)]="newTask.description"></textarea>
-<br><br>
+      <textarea placeholder="Description" [(ngModel)]="newTask.description"></textarea>
 
-<input type="date" [(ngModel)]="newTask.due_date">
-<br><br>
+      <input type="date" [(ngModel)]="newTask.due_date">
 
-<select [(ngModel)]="newTask.priority">
-  <option value="Low">Low</option>
-  <option value="Medium">Medium</option>
-  <option value="High">High</option>
-</select>
-<br><br>
+      <select [(ngModel)]="newTask.priority">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+    </div>
 
-<button (click)="addTask()">Add Task</button>
+    <button class="btn btn-add" (click)="addTask()">Add Task</button>
+  </section>
 
-<hr>
+  <section class="summary">
+    <p>Total Tasks: {{ totalTasks }}</p>
+    <p>Pending Tasks: {{ pendingCount }}</p>
+    <p>Completed Tasks: {{ completedCount }}</p>
+  </section>
 
-<p>Total Tasks: {{ totalTasks }}</p>
-<p>Pending Tasks: {{ pendingCount }}</p>
-<p>Completed Tasks: {{ completedCount }}</p>
+  <section class="filters">
+    <label for="statusFilter">Status Filter:</label>
+    <select id="statusFilter" [(ngModel)]="statusFilter" (change)="applyFilters()">
+      <option value="All">All</option>
+      <option value="Pending">Pending</option>
+      <option value="Done">Done</option>
+    </select>
 
-<label for="statusFilter">Status Filter:</label>
-<select id="statusFilter" [(ngModel)]="statusFilter" (change)="applyFilters()">
-  <option value="All">All</option>
-  <option value="Pending">Pending</option>
-  <option value="Done">Done</option>
-</select>
+    <label for="priorityFilter">Priority Filter:</label>
+    <select id="priorityFilter" [(ngModel)]="priorityFilter" (change)="applyFilters()">
+      <option value="All">All</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+    </select>
+  </section>
 
-<br><br>
+  <table class="task-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-<label for="priorityFilter">Priority Filter:</label>
-<select id="priorityFilter" [(ngModel)]="priorityFilter" (change)="applyFilters()">
-  <option value="All">All</option>
-  <option value="Low">Low</option>
-  <option value="Medium">Medium</option>
-  <option value="High">High</option>
-</select>
+    <tbody>
+      <tr *ngFor="let task of filteredTasks">
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.due_date?.substring(0, 10) }}</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.is_done ? 'Done' : 'Pending' }}</td>
+        <td class="actions">
+          <button
+            class="btn"
+            [class.btn-done]="!task.is_done"
+            [class.btn-pending]="task.is_done"
+            (click)="toggleTask(task)"
+          >
+            {{ task.is_done ? 'Mark as Not Done' : 'Mark as Done' }}
+          </button>
 
-<hr>
-
-<div *ngFor="let task of filteredTasks">
-  <h3>{{ task.title }}</h3>
-  <p>{{ task.description }}</p>
- <p>Due Date: {{ task.due_date?.substring(0, 10) }}</p>
-  <p>Priority: {{ task.priority }}</p>
-  <p>Status: {{ task.is_done ? 'Done' : 'Pending' }}</p>
-
-  <button (click)="toggleTask(task)">
-    {{ task.is_done ? 'Mark as Not Done' : 'Mark as Done' }}
-  </button>
-
-  <button (click)="deleteTask(task.id!)">
-    Delete
-  </button>
-
-  <hr>
-</div>
+          <button class="btn btn-delete" (click)="deleteTask(task.id!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</main>

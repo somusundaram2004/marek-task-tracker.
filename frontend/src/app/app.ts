@@ -8,7 +8,8 @@ import { Task } from './models/task.model';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './app.html'
+  templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class App implements OnInit {
   tasks: Task[] = [];
