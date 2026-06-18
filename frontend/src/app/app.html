@@ -1,14 +1,34 @@
 <h1>Task Tracker</h1>
 
+<h3>Add New Task</h3>
+
+<input type="text" placeholder="Title" [(ngModel)]="newTask.title">
+<br><br>
+
+<textarea placeholder="Description" [(ngModel)]="newTask.description"></textarea>
+<br><br>
+
+<input type="date" [(ngModel)]="newTask.due_date">
+<br><br>
+
+<select [(ngModel)]="newTask.priority">
+  <option value="Low">Low</option>
+  <option value="Medium">Medium</option>
+  <option value="High">High</option>
+</select>
+<br><br>
+
+<button (click)="addTask()">Add Task</button>
+
+<hr>
+
 <p>Total Tasks: {{ tasks.length }}</p>
 
 <div *ngFor="let task of tasks">
   <h3>{{ task.title }}</h3>
   <p>{{ task.description }}</p>
-
   <p>Due Date: {{ task.due_date | date:'mediumDate' }}</p>
   <p>Priority: {{ task.priority }}</p>
   <p>Status: {{ task.is_done ? 'Done' : 'Pending' }}</p>
-
   <hr>
 </div>
