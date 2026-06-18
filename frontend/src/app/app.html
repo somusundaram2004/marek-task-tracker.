@@ -27,8 +27,17 @@
 <div *ngFor="let task of tasks">
   <h3>{{ task.title }}</h3>
   <p>{{ task.description }}</p>
-  <p>Due Date: {{ task.due_date | date:'mediumDate' }}</p>
+ <p>Due Date: {{ task.due_date?.substring(0, 10) }}</p>
   <p>Priority: {{ task.priority }}</p>
   <p>Status: {{ task.is_done ? 'Done' : 'Pending' }}</p>
+
+  <button (click)="toggleTask(task)">
+    {{ task.is_done ? 'Mark as Not Done' : 'Mark as Done' }}
+  </button>
+
+  <button (click)="deleteTask(task.id!)">
+    Delete
+  </button>
+
   <hr>
 </div>

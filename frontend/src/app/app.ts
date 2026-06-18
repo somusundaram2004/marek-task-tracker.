@@ -54,18 +54,14 @@ export class App implements OnInit {
           priority: 'Medium',
           is_done: false
         };
+
         this.loadTasks();
       }
     });
   }
 
   toggleTask(task: Task): void {
-    const updatedTask: Task = {
-      ...task,
-      is_done: !task.is_done
-    };
-
-    this.taskService.updateTask(task.id!, updatedTask).subscribe({
+    this.taskService.toggleTaskStatus(task.id!).subscribe({
       next: () => {
         this.loadTasks();
       }

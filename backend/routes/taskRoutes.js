@@ -6,12 +6,14 @@ const {
   getTaskById,
   createTask,
   updateTask,
-  deleteTask
+  deleteTask,
+  toggleTaskStatus
 } = require('../controllers/taskController');
 
 router.get('/', getTasks);
 router.get('/:id', getTaskById);
 router.post('/', createTask);
+router.patch('/:id/toggle', toggleTaskStatus);
 router.put('/:id', updateTask);
 router.delete('/:id', deleteTask);
 
