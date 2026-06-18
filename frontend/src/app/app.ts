@@ -12,6 +12,21 @@ import { Task } from './models/task.model';
 })
 export class App implements OnInit {
   tasks: Task[] = [];
+  filteredTasks: Task[] = [];
+  statusFilter: string = 'All';
+  priorityFilter: string = 'All';
+
+  get totalTasks(): number {
+    return this.tasks.length;
+  }
+
+  get pendingTasks(): number {
+    return this.tasks.filter((task) => !task.is_done).length;
+  }
+
+  get doneTasks(): number {
+    return this.tasks.filter((task) => task.is_done).length;
+  }
 
   newTask: Task = {
     title: '',
@@ -34,8 +49,24 @@ export class App implements OnInit {
     this.taskService.getTasks().subscribe({
       next: (data) => {
         this.tasks = data;
+        this.applyFilters();
         this.cdr.detectChanges();
       }
+    });
+  }
+
+  applyFilters(): void {
+    this.filteredTasks = this.tasks.filter((task) => {
+      const matchesStatus =
+        this.statusFilter === 'All' ||
+        (this.statusFilter === 'Pending' && !task.is_done) ||
+        (this.statusFilter === 'Done' && task.is_done);
+
+      const matchesPriority =
+        this.priorityFilter === 'All' ||
+        task.priority === this.priorityFilter;
+
+      return matchesStatus && matchesPriority;
     });
   }
 

@@ -22,9 +22,20 @@
 
 <hr>
 
-<p>Total Tasks: {{ tasks.length }}</p>
+<p>Total Tasks: {{ totalTasks }}</p>
+<p>Pending Tasks: {{ pendingTasks }}</p>
+<p>Done Tasks: {{ doneTasks }}</p>
 
-<div *ngFor="let task of tasks">
+<label for="statusFilter">Status Filter:</label>
+<select id="statusFilter" [(ngModel)]="statusFilter" (change)="applyFilters()">
+  <option value="All">All</option>
+  <option value="Pending">Pending</option>
+  <option value="Done">Done</option>
+</select>
+
+<hr>
+
+<div *ngFor="let task of filteredTasks">
   <h3>{{ task.title }}</h3>
   <p>{{ task.description }}</p>
  <p>Due Date: {{ task.due_date?.substring(0, 10) }}</p>
