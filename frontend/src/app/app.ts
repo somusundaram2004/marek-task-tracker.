@@ -58,4 +58,31 @@ export class App implements OnInit {
       }
     });
   }
+
+  toggleTask(task: Task): void {
+    const updatedTask: Task = {
+      ...task,
+      is_done: !task.is_done
+    };
+
+    this.taskService.updateTask(task.id!, updatedTask).subscribe({
+      next: () => {
+        this.loadTasks();
+      }
+    });
+  }
+
+  deleteTask(id: number): void {
+    const confirmDelete = confirm('Are you sure you want to delete this task?');
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    this.taskService.deleteTask(id).subscribe({
+      next: () => {
+        this.loadTasks();
+      }
+    });
+  }
 }
