@@ -147,12 +147,21 @@ Run the schema file provided in the project.
 
 ## Screenshots
 
-Add screenshots here before submission:
+### Home Page
 
-* Home Page
-* Add Task
-* Task Filters
-* Database Table
+![Home Page](screenshots/home-page.png)
+
+### Add Task
+
+![Add Task](screenshots/add-task.png)
+
+### Task Filters
+
+![Task Filters](screenshots/task-filters.png)
+
+### Database Table
+
+The PostgreSQL `tasks` table is defined in `backend/db/schema.sql`. A database table screenshot can be added here if required by the evaluator.
 
 ---
 
