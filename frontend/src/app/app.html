@@ -1,83 +1,113 @@
-<main class="container">
-  <h1>Task Tracker</h1>
+<h1>Task Tracker</h1>
 
-  <section class="panel">
-    <h3>Add New Task</h3>
+<h3>Add New Task</h3>
 
-    <div class="form-grid">
+<table border="0" cellpadding="8" cellspacing="0">
+  <tr>
+    <td>Title</td>
+    <td>
       <input type="text" placeholder="Title" [(ngModel)]="newTask.title">
+    </td>
+  </tr>
 
+  <tr>
+    <td>Description</td>
+    <td>
       <textarea placeholder="Description" [(ngModel)]="newTask.description"></textarea>
+    </td>
+  </tr>
 
+  <tr>
+    <td>Due Date</td>
+    <td>
       <input type="date" [(ngModel)]="newTask.due_date">
+    </td>
+  </tr>
 
+  <tr>
+    <td>Priority</td>
+    <td>
       <select [(ngModel)]="newTask.priority">
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
         <option value="High">High</option>
       </select>
-    </div>
+    </td>
+  </tr>
 
-    <button class="btn btn-add" (click)="addTask()">Add Task</button>
-  </section>
+  <tr>
+    <td></td>
+    <td>
+      <button (click)="addTask()">Add Task</button>
+    </td>
+  </tr>
+</table>
 
-  <section class="summary">
-    <p>Total Tasks: {{ totalTasks }}</p>
-    <p>Pending Tasks: {{ pendingCount }}</p>
-    <p>Completed Tasks: {{ completedCount }}</p>
-  </section>
+<hr>
 
-  <section class="filters">
-    <label for="statusFilter">Status Filter:</label>
-    <select id="statusFilter" [(ngModel)]="statusFilter" (change)="applyFilters()">
-      <option value="All">All</option>
-      <option value="Pending">Pending</option>
-      <option value="Done">Done</option>
-    </select>
+<table border="0" cellpadding="8" cellspacing="0">
+  <tr>
+    <td><strong>Total Tasks:</strong> {{ totalTasks }}</td>
+    <td><strong>Pending Tasks:</strong> {{ pendingCount }}</td>
+    <td><strong>Completed Tasks:</strong> {{ completedCount }}</td>
+  </tr>
+</table>
 
-    <label for="priorityFilter">Priority Filter:</label>
-    <select id="priorityFilter" [(ngModel)]="priorityFilter" (change)="applyFilters()">
-      <option value="All">All</option>
-      <option value="Low">Low</option>
-      <option value="Medium">Medium</option>
-      <option value="High">High</option>
-    </select>
-  </section>
+<hr>
 
-  <table class="task-table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Due Date</th>
-        <th>Priority</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+<table border="0" cellpadding="8" cellspacing="0">
+  <tr>
+    <td>Status Filter</td>
+    <td>
+      <select id="statusFilter" [(ngModel)]="statusFilter" (change)="applyFilters()">
+        <option value="All">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Done">Done</option>
+      </select>
+    </td>
 
-    <tbody>
-      <tr *ngFor="let task of filteredTasks">
-        <td>{{ task.title }}</td>
-        <td>{{ task.description }}</td>
-        <td>{{ task.due_date?.substring(0, 10) }}</td>
-        <td>{{ task.priority }}</td>
-        <td>{{ task.is_done ? 'Done' : 'Pending' }}</td>
-        <td class="actions">
-          <button
-            class="btn"
-            [class.btn-done]="!task.is_done"
-            [class.btn-pending]="task.is_done"
-            (click)="toggleTask(task)"
-          >
-            {{ task.is_done ? 'Mark as Not Done' : 'Mark as Done' }}
-          </button>
+    <td>Priority Filter</td>
+    <td>
+      <select id="priorityFilter" [(ngModel)]="priorityFilter" (change)="applyFilters()">
+        <option value="All">All</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+    </td>
+  </tr>
+</table>
 
-          <button class="btn btn-delete" (click)="deleteTask(task.id!)">
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</main>
+<hr>
+
+<table border="0" cellpadding="10" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th align="left">Title</th>
+      <th align="left">Description</th>
+      <th align="left">Due Date</th>
+      <th align="left">Priority</th>
+      <th align="left">Status</th>
+      <th align="left">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let task of filteredTasks">
+      <td>{{ task.title }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.due_date?.substring(0, 10) }}</td>
+      <td>{{ task.priority }}</td>
+      <td>{{ task.is_done ? 'Done' : 'Pending' }}</td>
+      <td>
+        <button (click)="toggleTask(task)">
+          {{ task.is_done ? 'Mark as Not Done' : 'Mark as Done' }}
+        </button>
+
+        <button (click)="deleteTask(task.id!)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
